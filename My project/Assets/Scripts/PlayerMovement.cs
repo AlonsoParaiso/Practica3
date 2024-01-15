@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode rightKey, leftKey, jumpKey;
     public float speed, jumpForce, rayDistance;
     public LayerMask groundMask;// mascara de colisiones que queremos
-
-
+    private SpriteRenderer _rend;
+    private Animator _animator;
     private Rigidbody2D rb;
     private Vector2 dir;
     private bool isJumping = false;
@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _rend = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,10 +28,12 @@ public class PlayerMovement : MonoBehaviour
         dir = Vector2.zero;
         if (Input.GetKey(rightKey))
         {
+            _rend.flipX = false;
             dir = Vector2.right;
         }
         else if (Input.GetKey(leftKey))
         {
+            _rend.flipX = true;
             dir = new Vector2(-1, 0);
         }
 
@@ -39,11 +43,22 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
+
+        #region Animaciones
+        if (dir!= Vector2.zero) 
+        {
+            _animator.SetBool("IsWalking", true);  
+        }
+        else
+        {
+            _animator.SetBool("IsWalking", false);
+        }
+        #endregion
     }
 
     private void FixedUpdate()
     {
-        if (dir != Vector2.zero)
+        // if (dir != Vector2.zero)
         {
             float currentYvel = rb.velocity.y;
             Vector2 nVel = dir * speed;
@@ -54,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isJumping && IsGrounded())
         {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce * rb.gravityScale, ForceMode2D.Impulse);
             isJumping = false;
         }
@@ -73,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
 
         return false;
     }
+
+
 
     private void OnDrawGizmos()
     {

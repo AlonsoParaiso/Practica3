@@ -599,9 +599,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 28, y: 32}
-        - {x: 13, y: 17}
-        - {x: -32, y: -29}
+      - - {x: 32, y: 32}
+        - {x: -32, y: -32}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
         - {x: 32, y: 32}

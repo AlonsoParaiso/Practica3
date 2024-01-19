@@ -53,19 +53,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("IsWalking", false);
         }
-        if (IsGrounded())
-        {
-            _animator.SetBool("IsJumping", false);
-        }
-        else 
-        {
-            _animator.SetBool("IsJumping", true);
-        }
         #endregion
     }
 
     private void FixedUpdate()
     {
+        bool grnd = IsGrounded();
         // if (dir != Vector2.zero)
         {
             float currentYvel = rb.velocity.y;
@@ -75,11 +68,19 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (isJumping && IsGrounded())
+        if (isJumping && grnd)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce * rb.gravityScale, ForceMode2D.Impulse);
             isJumping = false;
+        }
+        if (grnd)
+        {
+            _animator.SetBool("IsJumping", false);
+        }
+        else
+        {
+            _animator.SetBool("IsJumping", true);
         }
     }
 

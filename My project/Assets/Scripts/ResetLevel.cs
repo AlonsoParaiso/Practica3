@@ -10,7 +10,7 @@ public class ResetLevel : MonoBehaviour
     {
         if (collision.GetComponent<PlayerMovement>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
 
     }

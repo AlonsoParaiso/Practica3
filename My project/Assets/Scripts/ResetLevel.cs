@@ -8,10 +8,9 @@ public class ResetLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//si se colisiona se reinicia la escena
     {
-        if (collision.GetComponent<PlayerMovement>())
+        if (!collision.GetComponent<PlayerMovement>())
         {
-            
+               Destroy(collision.gameObject); 
         }
-
     }
 }

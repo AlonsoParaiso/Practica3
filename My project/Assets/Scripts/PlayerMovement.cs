@@ -15,12 +15,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 dir;
     private bool isJumping = false;
+    public Vector2 pos;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         _rend = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        pos = transform.position;
     }
 
     // Update is called once per frame
@@ -111,4 +113,13 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Vector2.down * rayDistance);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<ResetLevel>())
+        {
+            transform.position = pos;
+        }
+    }
+
 }

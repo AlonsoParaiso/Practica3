@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public KeyCode rightKey, leftKey, jumpKey, resetGame;
+    public KeyCode rightKey, leftKey, jumpKey;
     public float speed, jumpForce, rayDistance;
     public LayerMask groundMask;// mascara de colisiones que queremos
     private SpriteRenderer _rend;
@@ -46,10 +46,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
-        if (Input.GetKeyDown(resetGame))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+       
 
         #region Animaciones
         if (dir!= Vector2.zero) 

@@ -10,7 +10,7 @@ public class DestroyPingu : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerMovement>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Destroy(collision.gameObject);
         }
     }
 }

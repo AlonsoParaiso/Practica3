@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform pingu;
     public float speedEnemy;
+    private SpriteRenderer _rend;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,10 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(pingu.position.x, transform.position.y), speedEnemy * Time.deltaTime);
+        if (pingu != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(pingu.position.x, transform.position.y), speedEnemy * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

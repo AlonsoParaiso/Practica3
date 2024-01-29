@@ -5,12 +5,23 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
-    public GameManager gameManager;
-    public TextMeshProUGUI puntos;
+    private TMP_Text text;
+    public GameManager.GameManagerVariables variable;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        text = GetComponent<TMP_Text>();
+    }
     void Update()
     {
-        puntos.text = gameManager.TotalPoints.ToString();
+       switch(variable)
+        {
+            case GameManager.GameManagerVariables.TIME:
+                text.text = "Time: " + GameManager.instance.GetTime().ToString("#.##");
+                break;
+            case GameManager.GameManagerVariables.POINTS:
+                text.text = "Points: " + GameManager.instance.GetPoints();
+                break;
+        }
     }
 }

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; //el game manager controla las variables del juego y es accesible a todos
-    public int TotalPoints { get { return totalPoints; } }
-    private int totalPoints;
+    private float time;
+    private int points;
+    public enum GameManagerVariables { TIME, POINTS };//para facilitar el codigo
 
     private void Awake()
     {
@@ -20,8 +22,33 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void PlusCoins(int puntosASumar)
+    void Update()
     {
-        totalPoints += puntosASumar;
+        time += Time.deltaTime;
     }
+
+    // getter
+    public float GetTime()
+    {
+        return time;
+    }
+
+    // getter
+    public int GetPoints()
+    {
+        return points;
+    }
+
+    // setter
+    public void SetPoints(int value)
+    {
+        points = value;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+    
+
 }

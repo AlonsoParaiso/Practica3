@@ -6,13 +6,15 @@ public class Coins : MonoBehaviour
 {
 
     public int value = 1;
-    public GameManager gameManager;
-
+    private int monedaTotal;
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            gameManager.PlusCoins(value);
+            monedaTotal = GameManager.instance.GetPoints();
+            monedaTotal = value+monedaTotal;
+            GameManager.instance.SetPoints(monedaTotal);
             Destroy(this.gameObject);
         }
 

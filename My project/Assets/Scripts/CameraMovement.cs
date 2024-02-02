@@ -18,6 +18,7 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(resetGame))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            AudioManager.instance.ClearAudio();
         }
 
     }

@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        AudioManager.instance.ClearAudio();
     }
     
     public void ExitGame() 

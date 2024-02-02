@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    private List<GameObject> audioList;
     // Start is called before the first frame update
     void Awake()
     {
@@ -17,11 +18,31 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        audioList = new List<GameObject>();
     }
 
-    public AudioSource PlayAudio(AudioClip audioClip, string gameObjectName, bool isLoop = false, float volume = 1.0f)
+    public AudioSource PlayAudio(AudioClip audioClip, string gameObjectName, bool isLoop = true, float volume = 1.0f)
     {
-        GameObject auidoObject = new GameObject(gameObjectName);
-        auidoObject.AddComponent<AudioSource>();
+        GameObject audioObject = new GameObject(gameObjectName);
+        audioObject.transform.SetParent(transform);
+        AudioSource srcComponent = audioObject.AddComponent<AudioSource>();
+        srcComponent.clip = audioClip;
+        srcComponent.volume = volume;
+        srcComponent.loop = isLoop;
+        srcComponent.Play();
+        audioList.Add(audioObject);
+
+
+
+        return srcComponent;
+    }
+
+    public void ClearAudio() 
+    {
+        foreach (GameObject audioObject in audioList) 
+        {
+            Destroy(audioObject);
+        }
+        audioList.Clear();
     }
 }

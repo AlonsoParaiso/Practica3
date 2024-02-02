@@ -50,5 +50,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
     
+    public void ExitGame() 
+    {
+        Debug.Log("Me cerraste wey");
+        Application.Quit();
+    }
 
 }

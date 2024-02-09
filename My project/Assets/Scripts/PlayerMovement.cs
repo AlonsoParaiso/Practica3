@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dir;
     private bool isJumping = false;
     public Vector2 pos;
+    public AudioClip audioClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce * rb.gravityScale, ForceMode2D.Impulse);
             isJumping = false;
+            AudioManager.instance.PlayAudio(audioClip,"jumpSound",false);
         }
         if (grnd)
         {

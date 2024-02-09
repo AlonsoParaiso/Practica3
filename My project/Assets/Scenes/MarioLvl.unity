@@ -835,7 +835,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 160599b9390342c45b5b8441464d8c3c, type: 3}
   isLoop: 1
   playOnStart: 1
-  volume: 1
+  volume: 0.8
   gameObjectName: Chimuelo
 --- !u!4 &611210825
 Transform:
@@ -959,6 +959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pingu: {fileID: 997794761}
   resetGame: 114
+  menu: 27
 --- !u!1001 &659673253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1323,6 +1324,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   pos: {x: 0, y: 0}
+  audioClip: {fileID: 8300000, guid: b2c2d1e81fd362c4894925b627f2c098, type: 3}
 --- !u!60 &997794767
 PolygonCollider2D:
   m_ObjectHideFlags: 0

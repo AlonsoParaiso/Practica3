@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject Pingu;
-    public KeyCode resetGame;
+    public KeyCode resetGame, menu;
 
     private void Update()
     {
@@ -21,6 +21,9 @@ public class CameraMovement : MonoBehaviour
             AudioManager.instance.ClearAudio();
         }
 
+        if (Input.GetKeyDown(menu)) {
+            GameManager.instance.LoadScene("Menu");
+        }
     }
 
 }

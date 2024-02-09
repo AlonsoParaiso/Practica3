@@ -103,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pingu: {fileID: 0}
   speedEnemy: 1
+  value: 1
+  audioClip: {fileID: 8300000, guid: 8a98a2f9ecd3c8549b1ea8146f13a376, type: 3}
 --- !u!61 &1909946109070627003
 BoxCollider2D:
   m_ObjectHideFlags: 0

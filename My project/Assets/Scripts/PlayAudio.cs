@@ -12,7 +12,7 @@ public class PlayAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(playOnStart)
+        if(playOnStart)//hace que funcione el audio
         {
             AudioManager.instance.PlayAudio(audioClip, gameObjectName,isLoop,volume);
         }

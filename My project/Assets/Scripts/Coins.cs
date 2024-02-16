@@ -11,9 +11,9 @@ public class Coins : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerMovement>())
+        if (collision.GetComponent<PlayerMovement>())//la moneda suma a la puntuacion total y tiene sonido y luego se destruye
         {
-            AudioManager.instance.PlayAudio(audioClip, "coinSound", false);
+            AudioManager.instance.PlayAudio(audioClip, "coinSound", false, 0.6f);
             monedaTotal = GameManager.instance.GetPoints();
             monedaTotal = value + monedaTotal;
             GameManager.instance.SetPoints(monedaTotal);

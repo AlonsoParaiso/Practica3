@@ -10,13 +10,16 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode rightKey, leftKey, jumpKey;
     public float speed, jumpForce, rayDistance;
     public LayerMask groundMask;// mascara de colisiones que queremos
+    public Vector2 pos;
+    public AudioClip audioClip;
+    public int maxJump = 2;
+
     private SpriteRenderer _rend;
     private Animator _animator;
     private Rigidbody2D rb;
     private Vector2 dir;
     private bool isJumping = false;
-    public Vector2 pos;
-    public AudioClip audioClip;
+    private int doubleJump = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,18 +44,18 @@ public class PlayerMovement : MonoBehaviour
             dir = new Vector2(-1, 0);
         }
 
-        isJumping = false;
 
-        if (Input.GetKey(jumpKey))
+
+        if (Input.GetKeyDown(jumpKey))
         {
             isJumping = true;
         }
-       
+
 
         #region Animaciones
-        if (dir!= Vector2.zero) 
+        if (dir != Vector2.zero)
         {
-            _animator.SetBool("IsWalking", true);  
+            _animator.SetBool("IsWalking", true);
         }
         else
         {
@@ -73,13 +76,16 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (isJumping && grnd)
+        if (isJumping && (grnd || doubleJump < maxJump - 1))
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce * rb.gravityScale, ForceMode2D.Impulse);
-            isJumping = false;
-            AudioManager.instance.PlayAudio(audioClip,"jumpSound",false);
+            doubleJump++;
+            AudioManager.instance.PlayAudio(audioClip, "jumpSound", false);
         }
+
+        isJumping = false;
+
         if (grnd)
         {
             _animator.SetBool("IsJumping", false);
@@ -93,11 +99,9 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         RaycastHit2D raycastHits = Physics2D.Raycast(transform.position, Vector2.down, rayDistance, groundMask);
-
-
-
         if (raycastHits)
         {
+            doubleJump = 0;
             return true;
         }
 
